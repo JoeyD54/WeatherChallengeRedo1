@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">WeatherChallengeRedo1</string>
+    <string name="temp_label">Temperature:  </string>
+    <string name="city_label">City: </string>
+    <string name="weather_button">Get Weather</string>
+    <string name="ten_day_button">10 Day Forecast</string>
+
+</resources>

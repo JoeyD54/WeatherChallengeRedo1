@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:id="@+id/Screen"
+    tools:context=".MainActivity">
+
+
+    <TextView
+        android:id="@+id/dummyLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <TextView
+        android:id="@+id/temperatureLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/temp_label"
+        android:textColor="@android:color/black"
+        android:layout_toLeftOf="@id/dummyLabel"
+        />
+
+    <TextView
+        android:id="@+id/temperatureText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="placeholder"
+        android:textColor="@android:color/black"
+        android:layout_toRightOf="@id/dummyLabel"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cityLabel"
+        android:text="@string/city_label"
+        android:textColor="@android:color/black"
+        android:layout_below="@id/temperatureLabel"
+        android:layout_toLeftOf="@id/cityText"
+        android:layout_marginRight="2dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cityText"
+        android:text="placeholder"
+        android:textColor="@android:color/black"
+        android:layout_below="@id/temperatureLabel"
+        android:layout_toRightOf="@id/dummyLabel"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/weatherButton"
+        android:text="@string/weather_button"
+        android:layout_below="@id/cityLabel"
+        android:layout_centerHorizontal="true"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ten_day_button"
+        android:layout_below="@id/weatherButton"
+        android:layout_centerHorizontal="true"
+        />
+</>
