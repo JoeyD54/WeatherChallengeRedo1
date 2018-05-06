@@ -4,5 +4,8 @@
     <string name="city_label">City: </string>
     <string name="weather_button">Get Weather</string>
     <string name="ten_day_button">10 Day Forecast</string>
+    <string name="title_location_permission">Location Permission</string>
+    <string name="text_location_permission">Allow location services to get local weather data</string>
+    <string name="ok">OK</string>
 
 </resources>

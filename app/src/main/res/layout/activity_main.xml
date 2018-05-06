@@ -22,7 +22,8 @@
         android:layout_height="wrap_content"
         android:text="@string/temp_label"
         android:textColor="@android:color/black"
-        android:layout_toLeftOf="@id/dummyLabel"
+        android:layout_toStartOf="@id/dummyLabel"
+        android:layout_toLeftOf="@+id/dummyLabel"
         />
 
     <TextView
