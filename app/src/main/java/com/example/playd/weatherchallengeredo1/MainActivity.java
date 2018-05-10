@@ -17,6 +17,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
+import com.google.android.gms.location.SettingsClient;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+
 
 public class MainActivity extends AppCompatActivity implements LocationListener{
 
@@ -25,6 +34,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
     public final int MY_LOCATION_PERMISSION = 0;
     public LocationManager locationManager;
     public String provider;
+    boolean locationChecked;
+
+    private FusedLocationProviderClient fusedLocationProviderClient;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,24 +48,47 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
 
         provider = locationManager.getBestProvider(new Criteria(), false);
 
-        Location location = locationManager.getLastKnownLocation(provider);
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         printCity = (TextView) findViewById(R.id.cityText);
         printTemperature = (TextView) findViewById(R.id.temperatureText);
         weatherButton = (Button) findViewById(R.id.weatherButton);
 
-        checkLocationPermission();
+        locationChecked = checkLocationPermission();
 
-        buttonPressed(location);
+        //Setting intervals for location gathering to a min of 1 minute to a max of 5
+
+        Toast.makeText(this, "We're in the if statement now", Toast.LENGTH_LONG).show();
+
+        LocationRequest locationRequest = new LocationRequest();
+        locationRequest.setInterval(300000);
+        locationRequest.setFastestInterval(60000);
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
+                .addLocationRequest(locationRequest);
+
+        SettingsClient client = LocationServices.getSettingsClient(this);
+        Task<LocationSettingsResponse> task = client.checkLocationSettings(builder.build());
+
+        task.addOnSuccessListener(this, new OnSuccessListener<LocationSettingsResponse>() {
+            @Override
+            public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
+
+            }
+        });
+
+//        buttonPressed();
 
 //        if (weatherButton.isPressed()) {
 //            printCity.setText(location.toString());
 //        }
     }
 
-    public void buttonPressed(Location location){
+ /*   public void buttonPressed(Location location){
         if(weatherButton.isPressed()){
             printCity.setText(location.toString());
+
         }
     }
     /*
@@ -62,6 +98,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
         condUrl = "http://api.wunderground.com/api/90645b02d360fe14/conditions/q/" + state + "/" + city + ".json";
 
      */
+    //setup location interval and create location task. Other shit.
+    public void
+
 
     public boolean checkLocationPermission(){
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
@@ -109,6 +148,16 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
                             Manifest.permission.ACCESS_COARSE_LOCATION)
                             == PackageManager.PERMISSION_GRANTED){
                         locationManager.requestLocationUpdates(provider, 400, 1, this);
+
+                        fusedLocationProviderClient.getLastLocation()
+                                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                                    @Override
+                                    public void onSuccess(Location location) {
+                                        if(location != null){
+
+                                        }
+                                    }
+                                });
                 }
             } else {
                 //Permission denied. Disable location shit.
